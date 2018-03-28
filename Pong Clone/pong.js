@@ -15,7 +15,7 @@ window.onload = function() {
     document.body.appendChild(canvas);
     animate(step);
 };
-//step function will udate all objects (paddles & ball), render them and use animate(step) to call the step functiona again//
+//step function will udate all objects (paddles & ball), render them and use animate(step) to call the step function again//
 var step = function() {
     update();
     render();
@@ -24,11 +24,18 @@ var step = function() {
 //update as a no-op (no operation, empty function) and use render function to give our pong canvas a color & show up on screen//
 var update = function() {
 };
+//build the objects and update render function//
+var player = new Player();
+var computer = new Computer();
+var ball = new Ball(200, 300);
 
 var render = function() {
-  context.fillStyle = "#FF00FF";
-  context.fillRect(0, 0, width, height);
-};
+    context.fillStyle = "#00FFFF";
+    context.fillRect(0, 0, width, height);
+    player.render();
+    computer.render();
+    ball.render();
+  };
 //create paddle object & give it an x,y position, height/width, and x,y speed//
 function Paddle(x, y, width, height) {
     this.x = x;
@@ -41,7 +48,7 @@ function Paddle(x, y, width, height) {
 //set paddle color to black//
 Paddle.prototype.render = function() {
     context.fillStyle = "#000000";
-    context.fillRect(this.x, this.y. this.width, this.height);
+    context.fillRect(this.x, this.y, this.width, this.height);
 };
 //create objects so that each paddle is controlled independently//
 function Player() {
@@ -73,15 +80,3 @@ Ball.prototype.render = function() {
     context.fillStyle = "#800000";
     context.fill();
 };
-//build the objects and update render function//
-var player = new Player();
-var computer = new Computer();
-var ball = new Ball(200, 300);
-
-var render = function() {
-    context.fillStyle = "#00FFFF";
-    context.fillRect(0, 0, width, height);
-    player.render();
-    computer.render();
-    ball.render();
-  };
